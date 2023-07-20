@@ -1,0 +1,37 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+ 
+{% block title %}
+Новость
+{% endblock title %}
+ 
+{% block content %}
+<h1>Новость</h1>
+
+<table>
+    <tr>
+        <td>
+            Заголовок
+        </td>
+        <td>
+            Дата публикации
+        </td>
+        <td>
+            Содержание статьи
+        </td>
+    </tr>
+    <tr>
+        <td>
+            {{ show_post.title|censor }}
+        </td>
+        <td>
+            {{ show_post.dateCreation|date:'d.m.Y' }}
+        </td>
+        <td>
+            {{ show_post.text|censor }}
+        </td>
+    </tr>
+</table>
+
+{% endblock content %}

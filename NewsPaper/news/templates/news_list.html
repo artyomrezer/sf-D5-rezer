@@ -1,0 +1,79 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+ 
+{% block title %}
+Список новостей
+{% endblock title %}
+ 
+{% block content %}
+<h1>Список постов на {{ time_now|date:'d.m.Y' }}</h1>
+<a href="/news/search">Поиск по постам</a>
+<br>
+<a href="/news/add">Добавить пост</a>
+<h3>количество новостей на странице: {{ news_list|length }}</h3>
+
+{% if news_list %} 
+        <table>
+            <tr>
+                <!-- <td>
+                    Заголовок
+                </td>
+                <td>
+                    Дата публикации
+                </td>
+                <td>
+                    Содержание статьи
+                </td> -->
+                <th scope="col">
+                    Заголовок
+                </th>
+                <th scope="col">
+                    Дата публикации
+                </th>
+                <th scope="col">
+                    Содержание статьи
+                </th>
+            </tr>
+        {% for news in news_list %}
+            <tr>
+                <td>
+                    <a href="{% url 'news:post_detail' news.id %}">
+                        {{ news.title|censor }}
+                    </a>
+                </td>
+                <!-- <td>
+                    {{ news.title|censor }}
+                </td> -->
+                <td>
+                    {{ news.dateCreation|date:'d.m.Y' }}
+                </td>
+                <td>
+                    {{ news.text|truncatechars:50|censor }}
+                </td>
+                <td>
+                    <a href="{% url 'news:post_update' news.id %}">
+                        Редактировать
+                    </a>
+                    <a href="{% url 'news:post_delete' news.id %}">
+                        Удалить
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+    
+        <br><br>
+        {% include 'parts/paginator.html' %}
+
+{% else %}
+    <h2>Новостей нет</h2>
+{% endif %}
+
+<!-- <form method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <input class="btn btn-success" type="submit" value="Add">
+ </form> -->
+
+{% endblock content %}

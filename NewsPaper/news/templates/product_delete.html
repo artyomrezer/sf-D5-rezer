@@ -1,0 +1,33 @@
+{% extends 'flatpages/default.html' %}
+
+
+{% block title %}
+Удаление поста
+{% endblock title %}
+
+{% block content %}
+
+<h3>Удалить эту запись?</h3>
+<div>
+ <div>
+   <h3>
+     {{ one_post.title }}
+   </h3>
+   <div>
+     Author: <span>{{ one_post.author }}</span>
+     <br>
+     Type: <span>{{ one_post.categoryType }}</span>
+   </div>
+ </div>
+ <div>
+  <br>
+   {{ one_post.text }}
+ </div>
+</div>
+<form method="POST">
+ {% csrf_token %}
+  <br> 
+  <input class="btn btn-success" type="submit" value="Удалить запись">
+</form>
+
+{% endblock content %}

@@ -1,0 +1,31 @@
+{% extends 'flatpages/default.html' %}
+
+
+{% block title %}
+Детали поста
+{% endblock title %}
+
+{% block content %}
+<div>
+ <div>
+   <h3>
+     {{ one_post.title }}
+   </h3>
+   <!-- <a href="/news/add">редактировать</a> -->
+   <!-- <br><br> -->
+   <div>
+     Author: <span>{{ one_post.author }}</span>
+     <br>
+     Type: <span>{{ one_post.categoryType }}</span>
+   </div>
+ </div>
+ <div>
+   <br>
+   {{ one_post.text }}
+ </div>
+</div>
+
+<br>
+<a href="/news/">к списку постов</a>
+
+{% endblock content %}
